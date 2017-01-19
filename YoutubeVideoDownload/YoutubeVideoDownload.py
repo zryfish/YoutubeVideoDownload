@@ -22,6 +22,7 @@ import urllib2
 import sys
 import time
 import argparse
+import re
 from os import path
 from urlparse import parse_qs
 from urllib2 import URLError
@@ -37,6 +38,9 @@ class VideoInfo(object):
     [VIDEO_ID]
     """
     def __init__(self, video_url):
+	pattern = re.compile('https://youtu.be/*')	
+	if pattern.match(video_url):
+		video_url = 'https://www.youtube.com/watch?v=' + video_url[-11:]
         request_url = 'http://www.youtube.com/get_video_info?video_id='
         if 'http://www.youtube.com/watch?v' in parse_qs(video_url).keys():
             request_url += parse_qs(video_url)['http://www.youtube.com/watch?v'][0]
@@ -148,7 +152,7 @@ def main():
 
     parser = argparse.ArgumentParser(description='YoutubeVideoDownload -- a small and simple program for downloading Youtube Video File')
     parser.add_argument('url', metavar='url', type=str, help='Youtube video URL string with "http://" prefixed')
-    parser.add_argument('type', metavar='type', type=str, help="Downloaded file's type ( webm || mp4 || 3gp || flv)")
+    parser.add_argument('type', metavar='type', nargs='?', const=1, default='mp4', type=str, help="Downloaded file's type ( webm || mp4 || 3gp || flv)")
     argvs = parser.parse_args()
     url_str = argvs.url
     type = __getFileType(argvs.type)
