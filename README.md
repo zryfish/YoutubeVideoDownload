@@ -30,7 +30,7 @@ Video File
 
 positional arguments:
   url         Youtube video URL string with "http://" prefixed
-  type        Downloaded file's type ( webm || mp4 || 3gp || flv), default is mp4
+  type        Downloaded file's type ( webm || mp4 || 3gp || flv), default mp4
 
 optional arguments:
   -h, --help  show this help message and exit

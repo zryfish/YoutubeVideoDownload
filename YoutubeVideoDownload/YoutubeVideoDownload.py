@@ -41,8 +41,8 @@ class VideoInfo(object):
         request_url = 'http://www.youtube.com/get_video_info?video_id='
         if 'http://www.youtube.com/watch?v' in parse_qs(video_url).keys():
             request_url += parse_qs(video_url)['http://www.youtube.com/watch?v'][0]
-	elif 'https://www.youtube.com/watch?v' in parse_qs(video_url).keys():
-	    request_url = 'https://www.youtube.com/get_video_info?video_id='+parse_qs(video_url)['https://www.youtube.com/watch?v'][0]
+        elif 'https://www.youtube.com/watch?v' in parse_qs(video_url).keys():
+            request_url = 'https://www.youtube.com/get_video_info?video_id='+parse_qs(video_url)['https://www.youtube.com/watch?v'][0]
         elif 'v' in parse_qs(video_url).keys():
             request_url += parse_qs(video_url)['v'][0]
         else :
@@ -153,11 +153,11 @@ def main():
     argvs = parser.parse_args()
     url_str = argvs.url
     type = __getFileType(argvs.type)
-	
+
     pattern = re.compiler('https://youtu.be/[a-zA-Z0-9_-]{11}')
     if pattern.match(url_str):
        url_str = 'https://www.youtube.com/watch?v=' + url_str[-11:]
-		
+
     if not type:
         sys.exit('Error : Unsupported file type %s' % argvs.type)
 
@@ -179,8 +179,6 @@ def main():
     downloader(url, video_title+'.'+argvs.type)
     
     sys.exit(0)
-
-
 
 if __name__ == '__main__':
     main()
