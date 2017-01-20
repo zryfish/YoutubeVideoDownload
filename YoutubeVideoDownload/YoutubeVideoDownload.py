@@ -38,9 +38,6 @@ class VideoInfo(object):
     [VIDEO_ID]
     """
     def __init__(self, video_url):
-	pattern = re.compile('https://youtu.be/*')	
-	if pattern.match(video_url):
-		video_url = 'https://www.youtube.com/watch?v=' + video_url[-11:]
         request_url = 'http://www.youtube.com/get_video_info?video_id='
         if 'http://www.youtube.com/watch?v' in parse_qs(video_url).keys():
             request_url += parse_qs(video_url)['http://www.youtube.com/watch?v'][0]
@@ -156,7 +153,11 @@ def main():
     argvs = parser.parse_args()
     url_str = argvs.url
     type = __getFileType(argvs.type)
-
+	
+	pattern = re.compiler('https://youtu.be/[a-zA-Z0-9_-]{11}')
+	if pattern.match(url_str):
+		url_str = 'https://www.youtube.com/watch?v=' + url_str[-11:]
+		
     if not type:
         sys.exit('Error : Unsupported file type %s' % argvs.type)
 
