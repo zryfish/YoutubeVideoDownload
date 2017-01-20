@@ -154,9 +154,9 @@ def main():
     url_str = argvs.url
     type = __getFileType(argvs.type)
 	
-	pattern = re.compiler('https://youtu.be/[a-zA-Z0-9_-]{11}')
-	if pattern.match(url_str):
-		url_str = 'https://www.youtube.com/watch?v=' + url_str[-11:]
+    pattern = re.compiler('https://youtu.be/[a-zA-Z0-9_-]{11}')
+    if pattern.match(url_str):
+       url_str = 'https://www.youtube.com/watch?v=' + url_str[-11:]
 		
     if not type:
         sys.exit('Error : Unsupported file type %s' % argvs.type)
